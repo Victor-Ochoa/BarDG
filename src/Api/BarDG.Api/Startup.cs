@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace BarDG.Api
 {
@@ -26,6 +27,22 @@ namespace BarDG.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddSwaggerGen(c => {
+
+                c.SwaggerDoc("Alpha",
+                    new OpenApiInfo
+                    {
+                        Title = "Bar Do DG API",
+                        Version = "Alpha",
+                        Description = "Api para fornecer os dados do projeto Bar do DG",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "Victor Ochoa",
+                            Url = new Uri("https://github.com/Victor-Ochoa")
+                        }
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +52,11 @@ namespace BarDG.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.RoutePrefix = string.Empty;
+                c.SwaggerEndpoint("/swagger/Alpha/swagger.json", "Bar Do DG - Alpha");
+            });
 
             app.UseHttpsRedirection();
 
