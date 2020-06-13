@@ -4,9 +4,8 @@ using System.Text;
 
 namespace BarDG.Domain.Entity
 {
-    public class Produto
+    public class Produto : Base.Entity
     {
-        public Guid Id { get; set; }
         public string Descricao { get; set; }
         public decimal Valor { get; set; }
     }

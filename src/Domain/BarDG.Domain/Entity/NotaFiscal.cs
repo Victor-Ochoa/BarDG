@@ -6,9 +6,8 @@ using System.Text;
 
 namespace BarDG.Domain.Entity
 {
-    public class NotaFiscal
+    public class NotaFiscal : Base.Entity
     {
-        public Guid Id { get; set; }
 
         public List<Produto> Produtos { get; set; }
         public decimal TotalDesconto { get; set; }

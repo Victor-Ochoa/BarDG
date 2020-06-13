@@ -5,11 +5,10 @@ using System.Text;
 
 namespace BarDG.Domain.Entity
 {
-    public class Comanda
+    public class Comanda : Base.Entity
     {
         private List<Produto> _produtos;
 
-        public Guid Id { get; set; }
         public ReadOnlyCollection<Produto> Produtos
         {
             get { return _produtos.AsReadOnly(); }
