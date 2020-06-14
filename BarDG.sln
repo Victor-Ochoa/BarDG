@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{381A8EC8-587
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarDG.Web", "src\Web\BarDG.Web\BarDG.Web.csproj", "{370D41BF-28F3-4B8A-9081-911C2953DD42}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{EB7845CA-ACC9-43C9-8886-B03F1090E712}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarDG.Repository", "src\Repository\BarDG.Repository\BarDG.Repository.csproj", "{B17DC714-2D57-48CA-86C7-A52EAF272753}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,10 @@ Global
 		{370D41BF-28F3-4B8A-9081-911C2953DD42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{370D41BF-28F3-4B8A-9081-911C2953DD42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{370D41BF-28F3-4B8A-9081-911C2953DD42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B17DC714-2D57-48CA-86C7-A52EAF272753}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B17DC714-2D57-48CA-86C7-A52EAF272753}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B17DC714-2D57-48CA-86C7-A52EAF272753}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B17DC714-2D57-48CA-86C7-A52EAF272753}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +49,7 @@ Global
 		{34FB25A6-5C54-4898-B949-E97DB6BCB50E} = {0611F31D-D548-4C26-8A7B-7F034A8F0254}
 		{64FE72A6-2C49-4F2F-9AA0-CF8F54403313} = {DCE622DF-6686-4A25-9C6A-6DEFD5E52409}
 		{370D41BF-28F3-4B8A-9081-911C2953DD42} = {381A8EC8-5872-46A3-8919-1482EC440B88}
+		{B17DC714-2D57-48CA-86C7-A52EAF272753} = {EB7845CA-ACC9-43C9-8886-B03F1090E712}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D02CCF9-0969-4008-ACF4-F5CCD871A7DC}
