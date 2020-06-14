@@ -6,7 +6,7 @@ namespace BarDG.Domain.Entity
 {
     public class Produto : Base.Entity
     {
-        public string Descricao { get; set; }
-        public decimal Valor { get; set; }
+        public virtual string Descricao { get; set; }
+        public virtual decimal Valor { get; set; }
     }
 }

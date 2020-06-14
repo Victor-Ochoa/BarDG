@@ -7,13 +7,7 @@ namespace BarDG.Domain.Entity
 {
     public class Comanda : Base.Entity
     {
-        private List<Produto> _produtos;
+        public virtual List<Produto> Produtos { get; set; }
 
-        public ReadOnlyCollection<Produto> Produtos
-        {
-            get { return _produtos.AsReadOnly(); }
-        }
-
-        public void AddProduto(Produto produto) => _produtos.Add(produto);
     }
 }
