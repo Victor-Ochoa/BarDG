@@ -1,4 +1,5 @@
 ﻿using BarDG.Repository;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -17,6 +18,15 @@ namespace BarDG.Infra
                 p.UseLazyLoadingProxies();
                 p.UseSqlite("DataSource=dbofile.db");
             });
+
+            return service;
+        }
+        public static IServiceCollection AddMediator(this IServiceCollection service)
+        {
+            var assemblyCommand = AppDomain.CurrentDomain.Load("BarDG.Domain"); 
+            var assemblyHandler = AppDomain.CurrentDomain.Load("BarDG.Service");
+
+            service.AddMediatR(assemblyCommand, assemblyHandler);
 
             return service;
         }

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.5" />
   </ItemGroup>
@@ -12,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\BarDG.Domain\BarDG.Domain.csproj" />
     <ProjectReference Include="..\..\Repository\BarDG.Repository\BarDG.Repository.csproj" />
+    <ProjectReference Include="..\..\Service\BarDG.Service\BarDG.Service.csproj" />
   </ItemGroup>
 
 </Project>
