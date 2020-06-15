@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using BarDG.Domain.Entity;
 using BarDG.Domain.Interface;
-using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BarDG.Api.Controllers
@@ -15,6 +11,6 @@ namespace BarDG.Api.Controllers
     {
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAllProdutos([FromServices] IMediator mediator) => Ok(await mediator.Send(new Domain.Command.GetAllProdutos()));
+        public async Task<IActionResult> GetAllProdutos([FromServices] IRepository<Produto> _repository) => Ok( await _repository.GetAll(asNoTracking: true));
     }
 }

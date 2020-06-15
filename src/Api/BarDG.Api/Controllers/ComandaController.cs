@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using BarDG.Domain.Entity;
+using BarDG.Domain.Interface;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BarDG.Api.Controllers
@@ -12,14 +10,17 @@ namespace BarDG.Api.Controllers
     [ApiController]
     public class ComandaController : ControllerBase
     {
+        [HttpGet]
+        [Route("")]
+        public async Task<IActionResult> GetAll([FromServices] IRepository<Comanda> _repository) => Ok(await _repository.GetAll(asNoTracking: true));
 
         [HttpPut]
         [Route("Create")]
-        public async Task<IActionResult> CreateNewComanda([FromServices] IMediator mediator) => Ok(await mediator.Send(new Domain.Command.CreateNewComanda()));
+        public async Task<IActionResult> CreateNewComanda([FromServices] IMediator _mediator) => Ok(await _mediator.Send(new Domain.Command.CreateNewComanda()));
 
 
         [HttpPost]
         [Route("addItemToComanda")]
-        public async Task<IActionResult> AddItemToComanda([FromServices] IMediator mediator, [FromBody] Domain.Command.AddItemToComanda addItemToComanda) => Ok(await mediator.Send(addItemToComanda));
+        public async Task<IActionResult> AddItemToComanda([FromServices] IMediator _mediator, [FromBody] Domain.Command.AddItemToComanda addItemToComanda) => Ok(await _mediator.Send(addItemToComanda));
     }
 }
