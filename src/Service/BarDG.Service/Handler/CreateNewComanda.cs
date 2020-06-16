@@ -19,7 +19,13 @@ namespace BarDG.Service.Handler
         }
         public async Task<Comanda> Handle(Domain.Command.CreateNewComanda request, CancellationToken cancellationToken)
         {
-            return await _repository.Add(new Comanda());
+            var comanda = new Comanda();
+
+            await _repository.Add(comanda);
+
+            await _repository.SaveChanges();
+
+            return comanda;
         }
     }
 }

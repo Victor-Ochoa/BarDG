@@ -9,20 +9,20 @@ namespace BarDG.Domain.Entity
     public class NotaFiscal : Base.Entity
     {
 
-        public virtual List<Produto> Produtos { get; set; }
-        public virtual decimal TotalDesconto { get; set; }
-        public virtual decimal TotalValor => Produtos.Sum(x => x.Valor);
+        public virtual List<Item> Items { get; set; }
+        public virtual decimal TotalDesconto => Items.Sum(x => x.Desconto);
+        public virtual decimal TotalValor => Items.Sum(x => x.Produto.Valor);
         public virtual decimal ValorFinal => TotalValor - TotalDesconto;
 
 
-        public NotaFiscal(List<Produto> produtos)
+        public NotaFiscal(List<Item> items)
         {
-            Produtos = produtos;
+            Items = items;
         }
 
         public NotaFiscal()
         {
-            Produtos = new List<Produto>();
+            Items = new List<Item>();
         }
     }
 }

@@ -27,13 +27,39 @@ namespace BarDG.Repository.Migrations
                     b.ToTable("Comandas");
                 });
 
-            modelBuilder.Entity("BarDG.Domain.Entity.NotaFiscal", b =>
+            modelBuilder.Entity("BarDG.Domain.Entity.Item", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("TotalDesconto")
+                    b.Property<Guid?>("ComandaId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Desconto")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("NotaFiscalId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("ProdutoId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComandaId");
+
+                    b.HasIndex("NotaFiscalId");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.ToTable("Item");
+                });
+
+            modelBuilder.Entity("BarDG.Domain.Entity.NotaFiscal", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -47,13 +73,7 @@ namespace BarDG.Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("ComandaId")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Descricao")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid?>("NotaFiscalId")
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Valor")
@@ -61,48 +81,48 @@ namespace BarDG.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ComandaId");
-
-                    b.HasIndex("NotaFiscalId");
-
                     b.ToTable("Produtos");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ef91528e-d3e9-450e-a75a-4b35e0ae8df2"),
+                            Id = new Guid("7faccc66-7825-4955-be38-55bc60442b2d"),
                             Descricao = "Cerveja",
                             Valor = 5m
                         },
                         new
                         {
-                            Id = new Guid("22bf78e3-5dfc-4444-a7fd-f30e4e0c2ea4"),
+                            Id = new Guid("a8a7133f-399e-4726-af44-90b94fd8853e"),
                             Descricao = "Conhaque",
                             Valor = 20m
                         },
                         new
                         {
-                            Id = new Guid("5cb07a8d-dc78-49d3-a494-95e54630c6bc"),
+                            Id = new Guid("837596d0-d7a4-46b5-ba31-290898fe2ee4"),
                             Descricao = "Suco",
                             Valor = 50m
                         },
                         new
                         {
-                            Id = new Guid("5386c928-176e-42e2-a431-0b4cc70c405b"),
+                            Id = new Guid("d3571a5d-79fd-4beb-9968-35ec551ec435"),
                             Descricao = "Água",
                             Valor = 70m
                         });
                 });
 
-            modelBuilder.Entity("BarDG.Domain.Entity.Produto", b =>
+            modelBuilder.Entity("BarDG.Domain.Entity.Item", b =>
                 {
                     b.HasOne("BarDG.Domain.Entity.Comanda", null)
                         .WithMany("Produtos")
                         .HasForeignKey("ComandaId");
 
                     b.HasOne("BarDG.Domain.Entity.NotaFiscal", null)
-                        .WithMany("Produtos")
+                        .WithMany("Items")
                         .HasForeignKey("NotaFiscalId");
+
+                    b.HasOne("BarDG.Domain.Entity.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId");
                 });
 #pragma warning restore 612, 618
         }

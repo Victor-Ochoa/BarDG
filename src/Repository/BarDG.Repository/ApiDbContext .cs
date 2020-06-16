@@ -22,6 +22,7 @@ namespace BarDG.Repository
 
             modelBuilder.Entity<Domain.Entity.Produto>().HasKey(x => x.Id);
             modelBuilder.Entity<Domain.Entity.Comanda>().HasKey(x => x.Id);
+            modelBuilder.Entity<Domain.Entity.Comanda>().HasMany(x => x.Produtos);
             modelBuilder.Entity<Domain.Entity.NotaFiscal>().HasKey(x => x.Id);
 
             modelBuilder.Entity<Domain.Entity.Produto>().HasData(

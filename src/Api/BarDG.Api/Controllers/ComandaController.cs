@@ -20,7 +20,11 @@ namespace BarDG.Api.Controllers
 
 
         [HttpPost]
-        [Route("addItemToComanda")]
+        [Route("AddItemToComanda")]
         public async Task<IActionResult> AddItemToComanda([FromServices] IMediator _mediator, [FromBody] Domain.Command.AddItemToComanda addItemToComanda) => Ok(await _mediator.Send(addItemToComanda));
+        
+        [HttpPost]
+        [Route("ResetComanda")]
+        public async Task<IActionResult> ResetComanda([FromServices] IMediator _mediator, [FromBody] Domain.Command.ResetComanda resetComanda) => Ok(await _mediator.Send(resetComanda));
     }
 }

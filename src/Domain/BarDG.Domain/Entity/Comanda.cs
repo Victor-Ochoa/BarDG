@@ -7,7 +7,9 @@ namespace BarDG.Domain.Entity
 {
     public class Comanda : Base.Entity
     {
-        public virtual List<Produto> Produtos { get; set; } = new List<Produto>();
+        public virtual List<Item> Produtos { get; set; } = new List<Item>();
+
+        public void ResetProdutos() => Produtos = new List<Item>();
 
     }
 }

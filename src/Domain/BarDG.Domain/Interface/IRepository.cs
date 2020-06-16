@@ -13,8 +13,11 @@ namespace BarDG.Domain.Interface
     {
         Task<T> Get(Guid id, bool asNoTracking = false, CancellationToken cancellationToken = default);
         Task<List<T>> GetAll(Expression<Func<T, bool>> where = null, bool asNoTracking = false, CancellationToken cancellationToken = default);
-        Task<T> Add(T entity, CancellationToken cancellationToken = default);
-        Task<T> Update(T entity, CancellationToken cancellationToken = default);
-        Task Remove(T entity, CancellationToken cancellationToken = default);
+        Task Add(T entity, CancellationToken cancellationToken = default);
+        Task Update(T entity);
+        Task Remove(T entity);
+        Task RemoveRange(IEnumerable<T> entities);
+
+        Task SaveChanges(CancellationToken cancellationToken = default);
     }
 }

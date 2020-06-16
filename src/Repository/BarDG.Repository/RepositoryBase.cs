@@ -20,13 +20,9 @@ namespace BarDG.Repository
             _dbSet = _dbContext.Set<T>();
         }
 
-        public async Task<T> Add(T entity, CancellationToken cancellationToken = default)
+        public async Task Add(T entity, CancellationToken cancellationToken = default)
         {
             await _dbSet.AddAsync(entity, cancellationToken);
-
-            await _dbContext.SaveChangesAsync(cancellationToken);
-
-            return entity;
         }
 
         public Task<T> Get(Guid id, bool asNoTracking = true, CancellationToken cancellationToken = default)
@@ -52,21 +48,24 @@ namespace BarDG.Repository
             return query.ToListAsync(cancellationToken);
         }
 
-        public async Task Remove(T entity, CancellationToken cancellationToken = default)
+        public async Task Remove(T entity)
         {
             _dbSet.Remove(entity);
+        }
 
+        public async Task Update(T entity)
+        {
+            _dbSet.Update(entity);
+        }
+
+        public async Task SaveChanges(CancellationToken cancellationToken = default)
+        {
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<T> Update(T entity, CancellationToken cancellationToken = default)
+        public async Task RemoveRange(IEnumerable<T> entities)
         {
-
-            _dbSet.Update(entity);
-
-            await _dbContext.SaveChangesAsync(cancellationToken);
-
-            return entity;
+            _dbSet.RemoveRange(entities);
         }
     }
 }

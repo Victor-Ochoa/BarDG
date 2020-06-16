@@ -5,9 +5,8 @@ using System.Text;
 
 namespace BarDG.Domain.Command
 {
-    public class AddItemToComanda : IRequest<Entity.Comanda>
+    public class ResetComanda : IRequest<Entity.Comanda>
     {
         public Guid ComandaId { get; set; }
-        public Guid ProductId { get; set; }
     }
 }
