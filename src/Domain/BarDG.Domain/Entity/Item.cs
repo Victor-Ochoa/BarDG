@@ -14,10 +14,7 @@ namespace BarDG.Domain.Entity
 
         public decimal ValorTotal => (Produto.Valor - Desconto) * Quantidade;
 
-        public Item()
-        {
-
-        }
+        public Item() { }
 
         public Item(Produto produto)
         {

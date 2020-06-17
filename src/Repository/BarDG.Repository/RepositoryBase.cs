@@ -67,5 +67,15 @@ namespace BarDG.Repository
         {
             _dbSet.RemoveRange(entities);
         }
+
+        public async Task AddOrUpdate(T entity, CancellationToken cancellationToken = default)
+        {
+            var exist = (await Get(entity.Id, cancellationToken: cancellationToken))!= null;
+
+            if (exist)
+                await Update(entity);
+            else
+                await Add(entity);
+        }
     }
 }

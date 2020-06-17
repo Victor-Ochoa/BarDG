@@ -79,6 +79,9 @@ namespace BarDG.Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("CompraMaxima")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Descricao")
                         .HasColumnType("TEXT");
 
@@ -92,25 +95,29 @@ namespace BarDG.Repository.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9fb45d9f-439f-40e5-952d-dc771dacb6a7"),
+                            Id = new Guid("c18491ae-c297-48ae-933b-f911b05c4f19"),
+                            CompraMaxima = 0,
                             Descricao = "Cerveja",
                             Valor = 5m
                         },
                         new
                         {
-                            Id = new Guid("905c8d80-dc0e-4fe8-96a2-c32dec8ef8c9"),
+                            Id = new Guid("f0f9cfc9-bc71-4e2f-814a-1ed899f7d68d"),
+                            CompraMaxima = 0,
                             Descricao = "Conhaque",
                             Valor = 20m
                         },
                         new
                         {
-                            Id = new Guid("c6835d63-fba6-4bc6-8946-8d43584e1687"),
+                            Id = new Guid("798dcd64-a060-4e33-a96a-9955b92dc0ba"),
+                            CompraMaxima = 3,
                             Descricao = "Suco",
                             Valor = 50m
                         },
                         new
                         {
-                            Id = new Guid("f5994248-a160-4c37-875f-5753aa2833ec"),
+                            Id = new Guid("0535425a-93d6-4841-a75a-f1a79abfc7aa"),
+                            CompraMaxima = 0,
                             Descricao = "Água",
                             Valor = 70m
                         });

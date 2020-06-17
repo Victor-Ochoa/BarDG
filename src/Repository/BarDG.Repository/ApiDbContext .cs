@@ -41,7 +41,8 @@ namespace BarDG.Repository
                 new Domain.Entity.Produto
                 {
                     Descricao = "Suco",
-                    Valor = 50
+                    Valor = 50,
+                    CompraMaxima = 3
                 },
                 new Domain.Entity.Produto
                 {

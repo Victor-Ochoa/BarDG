@@ -36,7 +36,8 @@ namespace BarDG.Repository.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Descricao = table.Column<string>(nullable: true),
-                    Valor = table.Column<decimal>(nullable: false)
+                    Valor = table.Column<decimal>(nullable: false),
+                    CompraMaxima = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -79,23 +80,23 @@ namespace BarDG.Repository.Migrations
 
             migrationBuilder.InsertData(
                 table: "Produtos",
-                columns: new[] { "Id", "Descricao", "Valor" },
-                values: new object[] { new Guid("9fb45d9f-439f-40e5-952d-dc771dacb6a7"), "Cerveja", 5m });
+                columns: new[] { "Id", "CompraMaxima", "Descricao", "Valor" },
+                values: new object[] { new Guid("c18491ae-c297-48ae-933b-f911b05c4f19"), 0, "Cerveja", 5m });
 
             migrationBuilder.InsertData(
                 table: "Produtos",
-                columns: new[] { "Id", "Descricao", "Valor" },
-                values: new object[] { new Guid("905c8d80-dc0e-4fe8-96a2-c32dec8ef8c9"), "Conhaque", 20m });
+                columns: new[] { "Id", "CompraMaxima", "Descricao", "Valor" },
+                values: new object[] { new Guid("f0f9cfc9-bc71-4e2f-814a-1ed899f7d68d"), 0, "Conhaque", 20m });
 
             migrationBuilder.InsertData(
                 table: "Produtos",
-                columns: new[] { "Id", "Descricao", "Valor" },
-                values: new object[] { new Guid("c6835d63-fba6-4bc6-8946-8d43584e1687"), "Suco", 50m });
+                columns: new[] { "Id", "CompraMaxima", "Descricao", "Valor" },
+                values: new object[] { new Guid("798dcd64-a060-4e33-a96a-9955b92dc0ba"), 3, "Suco", 50m });
 
             migrationBuilder.InsertData(
                 table: "Produtos",
-                columns: new[] { "Id", "Descricao", "Valor" },
-                values: new object[] { new Guid("f5994248-a160-4c37-875f-5753aa2833ec"), "Água", 70m });
+                columns: new[] { "Id", "CompraMaxima", "Descricao", "Valor" },
+                values: new object[] { new Guid("0535425a-93d6-4841-a75a-f1a79abfc7aa"), 0, "Água", 70m });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Itens_ComandaId",

@@ -19,5 +19,6 @@ namespace BarDG.Domain.Interface
         Task RemoveRange(IEnumerable<T> entities);
 
         Task SaveChanges(CancellationToken cancellationToken = default);
+        Task AddOrUpdate(T entity, CancellationToken cancellationToken = default);
     }
 }
