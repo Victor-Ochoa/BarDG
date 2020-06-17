@@ -31,7 +31,7 @@ namespace BarDG.Service.Handler
 
             await _repositoryComanda.SaveChanges();
 
-            return await comanda;         
+            return comanda;         
         }
     }
 }

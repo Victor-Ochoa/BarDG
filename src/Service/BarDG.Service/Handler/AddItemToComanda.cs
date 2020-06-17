@@ -30,6 +30,9 @@ namespace BarDG.Service.Handler
 
             comanda.AddItem(produto);
 
+            if (comanda.Invalid)
+                return comanda;
+
             foreach (var item in comanda.Itens)
             {
                 await _repositoryItem.AddOrUpdate(item, cancellationToken: cancellationToken);

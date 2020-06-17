@@ -15,6 +15,13 @@ namespace BarDG.Domain.Entity
 
         public void AddItem(Produto produto)
         {
+            if (produto == null)
+            {
+                this.AddNotification("AddItem(Produto)", "Produto nulo");
+                return;
+            }
+                
+
             if (Itens.Any(x => x.Produto.Equals(produto)))
             {
                 foreach (var itemNaComanda in Itens)
