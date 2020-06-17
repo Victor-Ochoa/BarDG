@@ -8,7 +8,7 @@ namespace BarDG.Domain.Entity
     {
         public virtual Produto Produto { get; set; }
 
-        public virtual decimal Desconto { get; set; }
+        public virtual decimal Desconto { get; set; } = 0M;
 
         public Item()
         {

@@ -13,7 +13,8 @@ namespace BarDG.Repository
 
         public DbSet<Domain.Entity.Produto> Produtos{ get; set; }
         public DbSet<Domain.Entity.Comanda> Comandas{ get; set; }
-        public DbSet<Domain.Entity.NotaFiscal> NotaFiscals{ get; set; }
+        public DbSet<Domain.Entity.NotaFiscal> NotaFiscais{ get; set; }
+        public DbSet<Domain.Entity.Item> Itens{ get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -22,7 +23,8 @@ namespace BarDG.Repository
 
             modelBuilder.Entity<Domain.Entity.Produto>().HasKey(x => x.Id);
             modelBuilder.Entity<Domain.Entity.Comanda>().HasKey(x => x.Id);
-            modelBuilder.Entity<Domain.Entity.Comanda>().HasMany(x => x.Produtos);
+            modelBuilder.Entity<Domain.Entity.Comanda>().HasMany(x => x.Itens);
+            modelBuilder.Entity<Domain.Entity.Item>().HasKey(x => x.Id);
             modelBuilder.Entity<Domain.Entity.NotaFiscal>().HasKey(x => x.Id);
 
             modelBuilder.Entity<Domain.Entity.Produto>().HasData(

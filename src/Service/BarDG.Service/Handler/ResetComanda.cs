@@ -23,9 +23,9 @@ namespace BarDG.Service.Handler
         {
             var comanda = await _repositoryComanda.Get(request.ComandaId);
 
-            await _repositoryItem.RemoveRange(comanda.Produtos);
+            await _repositoryItem.RemoveRange(comanda.Itens);
 
-            comanda.ResetProdutos();
+            comanda.Reset();
 
             await _repositoryComanda.Update(comanda);
 

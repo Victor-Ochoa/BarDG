@@ -28,7 +28,7 @@ namespace BarDG.Service.Handler
 
             var item = new Item(await _repositoryProduto.Get(request.ProductId));
 
-            comanda.Produtos.Add(item);
+            comanda.Itens.Add(item);
 
             await _repositoryItem.Add(item);
 
