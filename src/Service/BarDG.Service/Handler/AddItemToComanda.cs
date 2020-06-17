@@ -24,15 +24,29 @@ namespace BarDG.Service.Handler
         }
         public async Task<Comanda> Handle(Domain.Command.AddItemToComanda request, CancellationToken cancellationToken)
         {
-            var comanda = await _repositoryComanda.Get(request.ComandaId);
+            var comanda = await _repositoryComanda.Get(request.ComandaId, cancellationToken: cancellationToken);
 
-            var item = new Item(await _repositoryProduto.Get(request.ProductId));
+            if (comanda.Itens.Any(x => x.Produto.Id == request.ProductId))
+            {
+                foreach (var itemNaComanda in comanda.Itens)
+                {
+                    if (itemNaComanda.Produto.Id == request.ProductId)
+                    {
+                        itemNaComanda.Quantidade++;
+                        await _repositoryItem.Update(itemNaComanda);
+                    }
+                }
+            }
+            else
+            {
+                var item = new Item(await _repositoryProduto.Get(request.ProductId,cancellationToken: cancellationToken));
 
-            comanda.Itens.Add(item);
+                comanda.Itens.Add(item);
 
-            await _repositoryItem.Add(item);
+                await _repositoryItem.Add(item, cancellationToken: cancellationToken);
+            }
 
-            await _repositoryComanda.SaveChanges();
+            await _repositoryComanda.SaveChanges(cancellationToken);
 
             return comanda;
         }
