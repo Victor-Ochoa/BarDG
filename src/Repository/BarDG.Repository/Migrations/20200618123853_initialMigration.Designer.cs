@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarDG.Repository.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20200618025223_initialMigration")]
+    [Migration("20200618123853_initialMigration")]
     partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,8 +41,8 @@ namespace BarDG.Repository.Migrations
                     b.Property<int?>("ComandaId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Desconto")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Desconto")
+                        .HasColumnType("REAL");
 
                     b.Property<int?>("NotaFiscalId")
                         .HasColumnType("INTEGER");
@@ -87,8 +87,8 @@ namespace BarDG.Repository.Migrations
                     b.Property<string>("Descricao")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Valor")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Valor")
+                        .HasColumnType("REAL");
 
                     b.HasKey("Id");
 
@@ -101,8 +101,8 @@ namespace BarDG.Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Desconto")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Desconto")
+                        .HasColumnType("REAL");
 
                     b.Property<bool>("DescontoMaximo")
                         .HasColumnType("INTEGER");

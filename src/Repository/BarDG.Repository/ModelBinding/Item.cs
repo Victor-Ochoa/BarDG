@@ -12,6 +12,7 @@ namespace BarDG.Repository.ModelBinding
         {
             builder.HasKey(x => x.Id);
             builder.Ignore(x => x.Notifications);
+            builder.Property(x => x.Desconto).HasConversion<double>();
         }
     }
 }

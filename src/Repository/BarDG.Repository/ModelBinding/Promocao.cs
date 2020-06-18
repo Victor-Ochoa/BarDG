@@ -14,8 +14,7 @@ namespace BarDG.Repository.ModelBinding
             builder.Ignore(x => x.Notifications);
             builder.HasMany(x => x.ItensAtivadores);
             builder.HasOne(x => x.ItemDesconto);
-
-            //builder.HasData(InitiateValue.Promocao.PromoCerveja, InitiateValue.Promocao.PromoAgua);
+            builder.Property(x => x.Desconto).HasConversion<double>();
         }
     }
 }

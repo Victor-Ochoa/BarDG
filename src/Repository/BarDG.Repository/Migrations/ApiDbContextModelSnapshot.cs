@@ -39,8 +39,8 @@ namespace BarDG.Repository.Migrations
                     b.Property<int?>("ComandaId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Desconto")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Desconto")
+                        .HasColumnType("REAL");
 
                     b.Property<int?>("NotaFiscalId")
                         .HasColumnType("INTEGER");
@@ -85,8 +85,8 @@ namespace BarDG.Repository.Migrations
                     b.Property<string>("Descricao")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Valor")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Valor")
+                        .HasColumnType("REAL");
 
                     b.HasKey("Id");
 
@@ -99,8 +99,8 @@ namespace BarDG.Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Desconto")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Desconto")
+                        .HasColumnType("REAL");
 
                     b.Property<bool>("DescontoMaximo")
                         .HasColumnType("INTEGER");

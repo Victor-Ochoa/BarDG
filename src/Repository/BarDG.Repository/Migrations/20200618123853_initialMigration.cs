@@ -39,7 +39,7 @@ namespace BarDG.Repository.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Descricao = table.Column<string>(nullable: true),
-                    Valor = table.Column<decimal>(nullable: false),
+                    Valor = table.Column<double>(nullable: false),
                     CompraMaxima = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -54,7 +54,7 @@ namespace BarDG.Repository.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ProdutoId = table.Column<int>(nullable: true),
-                    Desconto = table.Column<decimal>(nullable: false),
+                    Desconto = table.Column<double>(nullable: false),
                     Quantidade = table.Column<int>(nullable: false),
                     ComandaId = table.Column<int>(nullable: true),
                     NotaFiscalId = table.Column<int>(nullable: true)
@@ -89,7 +89,7 @@ namespace BarDG.Repository.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ItemDescontoId = table.Column<int>(nullable: true),
-                    Desconto = table.Column<decimal>(nullable: false),
+                    Desconto = table.Column<double>(nullable: false),
                     DescontoMaximo = table.Column<bool>(nullable: false),
                     RepetirPromocao = table.Column<bool>(nullable: false)
                 },

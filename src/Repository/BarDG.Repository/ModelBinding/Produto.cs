@@ -12,8 +12,7 @@ namespace BarDG.Repository.ModelBinding
         {
             builder.HasKey(x => x.Id);
             builder.Ignore(x => x.Notifications);
-
-            //builder.HasData(InitiateValue.Produto.Cerveja, InitiateValue.Produto.Conhaque, InitiateValue.Produto.Suco, InitiateValue.Produto.Água);
+            builder.Property(x => x.Valor).HasConversion<double>();
         }
     }
 }
