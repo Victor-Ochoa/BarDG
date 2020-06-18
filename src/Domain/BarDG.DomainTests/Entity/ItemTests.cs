@@ -18,7 +18,7 @@ namespace BarDG.Domain.Entity.Tests
                 Valor = 50
             };
 
-            var item = new Item(produto);
+            var item = new ComandaItem(produto);
 
             var promocao = new Promocao
             {
@@ -45,7 +45,7 @@ namespace BarDG.Domain.Entity.Tests
                 Valor = 50
             };
 
-            var item = new Item(produto);
+            var item = new ComandaItem(produto);
 
             var promocao = new Promocao
             {

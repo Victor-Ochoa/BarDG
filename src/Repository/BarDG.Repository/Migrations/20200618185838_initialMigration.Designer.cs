@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarDG.Repository.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20200618123853_initialMigration")]
+    [Migration("20200618185838_initialMigration")]
     partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,7 +32,7 @@ namespace BarDG.Repository.Migrations
                     b.ToTable("Comandas");
                 });
 
-            modelBuilder.Entity("BarDG.Domain.Entity.Item", b =>
+            modelBuilder.Entity("BarDG.Domain.Entity.ComandaItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,9 +44,6 @@ namespace BarDG.Repository.Migrations
                     b.Property<double>("Desconto")
                         .HasColumnType("REAL");
 
-                    b.Property<int?>("NotaFiscalId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int?>("ProdutoId")
                         .HasColumnType("INTEGER");
 
@@ -56,8 +53,6 @@ namespace BarDG.Repository.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ComandaId");
-
-                    b.HasIndex("NotaFiscalId");
 
                     b.HasIndex("ProdutoId");
 
@@ -70,9 +65,40 @@ namespace BarDG.Repository.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("NotaFiscais");
+                });
+
+            modelBuilder.Entity("BarDG.Domain.Entity.NotaFiscalItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("Desconto")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("NomeProduto")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("NotaFiscalId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("Valor")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NotaFiscalId");
+
+                    b.ToTable("NotaFiscalItens");
                 });
 
             modelBuilder.Entity("BarDG.Domain.Entity.Produto", b =>
@@ -144,19 +170,22 @@ namespace BarDG.Repository.Migrations
                     b.ToTable("PromocaoItens");
                 });
 
-            modelBuilder.Entity("BarDG.Domain.Entity.Item", b =>
+            modelBuilder.Entity("BarDG.Domain.Entity.ComandaItem", b =>
                 {
                     b.HasOne("BarDG.Domain.Entity.Comanda", null)
                         .WithMany("Itens")
                         .HasForeignKey("ComandaId");
 
-                    b.HasOne("BarDG.Domain.Entity.NotaFiscal", null)
-                        .WithMany("Itens")
-                        .HasForeignKey("NotaFiscalId");
-
                     b.HasOne("BarDG.Domain.Entity.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("ProdutoId");
+                });
+
+            modelBuilder.Entity("BarDG.Domain.Entity.NotaFiscalItem", b =>
+                {
+                    b.HasOne("BarDG.Domain.Entity.NotaFiscal", null)
+                        .WithMany("Itens")
+                        .HasForeignKey("NotaFiscalId");
                 });
 
             modelBuilder.Entity("BarDG.Domain.Entity.Promocao", b =>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BarDG.Domain.Entity
 {
-    public class Item : Base.Entity
+    public class ComandaItem : Base.Entity
     {
         public virtual Produto Produto { get; set; }
 
@@ -14,9 +14,9 @@ namespace BarDG.Domain.Entity
 
         public decimal ValorTotal => (Produto.Valor * Quantidade )- Desconto ;
 
-        public Item() { }
+        public ComandaItem() { }
 
-        public Item(Produto produto)
+        public ComandaItem(Produto produto)
         {
             Produto = produto;
         }

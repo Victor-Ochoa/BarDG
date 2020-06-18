@@ -25,7 +25,8 @@ namespace BarDG.Repository.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DataCriacao = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,6 +49,29 @@ namespace BarDG.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NotaFiscalItens",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    NomeProduto = table.Column<string>(nullable: true),
+                    Quantidade = table.Column<int>(nullable: false),
+                    Valor = table.Column<double>(nullable: false),
+                    Desconto = table.Column<double>(nullable: false),
+                    NotaFiscalId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NotaFiscalItens", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_NotaFiscalItens_NotaFiscais_NotaFiscalId",
+                        column: x => x.NotaFiscalId,
+                        principalTable: "NotaFiscais",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Itens",
                 columns: table => new
                 {
@@ -56,8 +80,7 @@ namespace BarDG.Repository.Migrations
                     ProdutoId = table.Column<int>(nullable: true),
                     Desconto = table.Column<double>(nullable: false),
                     Quantidade = table.Column<int>(nullable: false),
-                    ComandaId = table.Column<int>(nullable: true),
-                    NotaFiscalId = table.Column<int>(nullable: true)
+                    ComandaId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,12 +89,6 @@ namespace BarDG.Repository.Migrations
                         name: "FK_Itens_Comandas_ComandaId",
                         column: x => x.ComandaId,
                         principalTable: "Comandas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Itens_NotaFiscais_NotaFiscalId",
-                        column: x => x.NotaFiscalId,
-                        principalTable: "NotaFiscais",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -137,14 +154,14 @@ namespace BarDG.Repository.Migrations
                 column: "ComandaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Itens_NotaFiscalId",
-                table: "Itens",
-                column: "NotaFiscalId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Itens_ProdutoId",
                 table: "Itens",
                 column: "ProdutoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NotaFiscalItens_NotaFiscalId",
+                table: "NotaFiscalItens",
+                column: "NotaFiscalId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PromocaoItens_ItemId",
@@ -166,6 +183,9 @@ namespace BarDG.Repository.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Itens");
+
+            migrationBuilder.DropTable(
+                name: "NotaFiscalItens");
 
             migrationBuilder.DropTable(
                 name: "PromocaoItens");

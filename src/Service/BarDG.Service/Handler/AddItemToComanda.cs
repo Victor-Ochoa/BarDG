@@ -14,10 +14,10 @@ namespace BarDG.Service.Handler
     {
         private readonly IRepository<Comanda> _repositoryComanda;
         private readonly IRepository<Produto> _repositoryProduto;
-        private readonly IRepository<Item> _repositoryItem;
+        private readonly IRepository<ComandaItem> _repositoryItem;
         private readonly IMediator _mediator;
 
-        public AddItemToComanda(IRepository<Comanda> repositoryComanda, IRepository<Produto> repositoryProduto, IRepository<Item> repositoryItem, IMediator mediator)
+        public AddItemToComanda(IRepository<Comanda> repositoryComanda, IRepository<Produto> repositoryProduto, IRepository<ComandaItem> repositoryItem, IMediator mediator)
         {
             this._repositoryComanda = repositoryComanda;
             this._repositoryProduto = repositoryProduto;

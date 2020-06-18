@@ -8,10 +8,10 @@ namespace BarDG.Domain.Entity
 {
     public class Comanda : Base.Entity
     {
-        public virtual List<Item> Itens { get; set; } = new List<Item>();
+        public virtual List<ComandaItem> Itens { get; set; } = new List<ComandaItem>();
         public virtual DateTime DataCriacao { get; private set; } = DateTime.Now;
 
-        public void Reset() => Itens = new List<Item>();
+        public void Reset() => Itens = new List<ComandaItem>();
 
         public void AddItem(Produto produto)
         {
@@ -40,7 +40,7 @@ namespace BarDG.Domain.Entity
             }
             else
             {
-                Itens.Add(new Item(produto));
+                Itens.Add(new ComandaItem(produto));
             }
         }
 

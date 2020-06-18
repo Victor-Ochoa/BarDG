@@ -12,9 +12,9 @@ namespace BarDG.Service.Handler
     public class ResetComanda : IRequestHandler<Domain.Command.ResetComanda, Comanda>
     {
         private readonly IRepository<Comanda> _repositoryComanda;
-        private readonly IRepository<Item> _repositoryItem;
+        private readonly IRepository<ComandaItem> _repositoryItem;
 
-        public ResetComanda(IRepository<Comanda> repositoryComanda, IRepository<Item> repositoryItem)
+        public ResetComanda(IRepository<Comanda> repositoryComanda, IRepository<ComandaItem> repositoryItem)
         {
             this._repositoryComanda = repositoryComanda;
             this._repositoryItem = repositoryItem;
