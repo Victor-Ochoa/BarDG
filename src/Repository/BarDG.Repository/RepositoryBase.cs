@@ -25,7 +25,7 @@ namespace BarDG.Repository
             await _dbSet.AddAsync(entity, cancellationToken);
         }
 
-        public Task<T> Get(Guid id, bool asNoTracking = true, CancellationToken cancellationToken = default)
+        public Task<T> Get(int id, bool asNoTracking = true, CancellationToken cancellationToken = default)
         {
             var query = _dbSet.AsQueryable();
 

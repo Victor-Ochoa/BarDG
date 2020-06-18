@@ -7,7 +7,7 @@ namespace BarDG.Domain.Command
 {
     public class AddItemToComanda : IRequest<Entity.Comanda>
     {
-        public Guid ComandaId { get; set; }
-        public Guid ProductId { get; set; }
+        public int ComandaId { get; set; }
+        public int ProductId { get; set; }
     }
 }

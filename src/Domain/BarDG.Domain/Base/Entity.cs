@@ -7,11 +7,7 @@ namespace BarDG.Domain.Base
 {
     public abstract class Entity: Notifiable
     {
-        public Guid Id { get; private set; }
+        public virtual int Id { get; set; }
 
-        public Entity()
-        {
-            Id = Guid.NewGuid();
-        }
     }
 }

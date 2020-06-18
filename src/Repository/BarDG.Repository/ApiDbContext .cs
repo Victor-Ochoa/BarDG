@@ -15,6 +15,8 @@ namespace BarDG.Repository
         public DbSet<Domain.Entity.Comanda> Comandas{ get; set; }
         public DbSet<Domain.Entity.NotaFiscal> NotaFiscais{ get; set; }
         public DbSet<Domain.Entity.Item> Itens{ get; set; }
+        public DbSet<Domain.Entity.Promocao> Promocoes{ get; set; }
+        public DbSet<Domain.Entity.PromocaoItem> PromocaoItens{ get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

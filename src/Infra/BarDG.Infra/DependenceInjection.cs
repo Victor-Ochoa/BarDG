@@ -15,6 +15,7 @@ namespace BarDG.Infra
             service.AddTransient(typeof(Domain.Interface.IRepository<>), typeof(Repository.RepositoryBase<>));
 
             service.AddDbContext<ApiDbContext>(p => {
+                p.EnableSensitiveDataLogging();
                 p.UseLazyLoadingProxies();
                 p.UseSqlite("DataSource=dbofile.db");
             });

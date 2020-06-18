@@ -11,7 +11,7 @@ namespace BarDG.Domain.Interface
     public interface IRepository<T> 
         where T: Base.Entity 
     {
-        Task<T> Get(Guid id, bool asNoTracking = false, CancellationToken cancellationToken = default);
+        Task<T> Get(int id, bool asNoTracking = false, CancellationToken cancellationToken = default);
         Task<List<T>> GetAll(Expression<Func<T, bool>> where = null, bool asNoTracking = false, CancellationToken cancellationToken = default);
         Task Add(T entity, CancellationToken cancellationToken = default);
         Task Update(T entity);

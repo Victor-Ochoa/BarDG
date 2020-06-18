@@ -9,8 +9,7 @@ namespace BarDG.Domain.Entity
     {
         public virtual string Descricao { get; set; }
         public virtual decimal Valor { get; set; }
-
-        public int CompraMaxima { get; set; }
+        public virtual int CompraMaxima { get; set; }
 
         public bool Equals([AllowNull] Produto other)
         {

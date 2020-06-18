@@ -6,14 +6,13 @@ using System.Text;
 
 namespace BarDG.Repository.ModelBinding
 {
-    public class Produto : IEntityTypeConfiguration<Domain.Entity.Produto>
+    public class PromocaoItem : IEntityTypeConfiguration<Domain.Entity.PromocaoItem>
     {
-        public void Configure(EntityTypeBuilder<Domain.Entity.Produto> builder)
+        public void Configure(EntityTypeBuilder<Domain.Entity.PromocaoItem> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Ignore(x => x.Notifications);
-
-            //builder.HasData(InitiateValue.Produto.Cerveja, InitiateValue.Produto.Conhaque, InitiateValue.Produto.Suco, InitiateValue.Produto.Água);
+            builder.HasOne(x => x.Item);
         }
     }
 }

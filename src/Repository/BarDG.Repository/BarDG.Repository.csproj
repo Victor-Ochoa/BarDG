@@ -17,6 +17,12 @@
     <Compile Remove="Migrations\20200616011946_InitialMigration.Designer.cs" />
     <Compile Remove="Migrations\20200617014457_InitialMigration.cs" />
     <Compile Remove="Migrations\20200617014457_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200617022441_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200617022441_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200618004943_promocao.cs" />
+    <Compile Remove="Migrations\20200618004943_promocao.Designer.cs" />
+    <Compile Remove="Migrations\20200618022824_promocao.cs" />
+    <Compile Remove="Migrations\20200618022824_promocao.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

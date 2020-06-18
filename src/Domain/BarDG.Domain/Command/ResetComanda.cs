@@ -7,6 +7,6 @@ namespace BarDG.Domain.Command
 {
     public class ResetComanda : IRequest<Entity.Comanda>
     {
-        public Guid ComandaId { get; set; }
+        public int ComandaId { get; set; }
     }
 }
