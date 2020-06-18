@@ -28,6 +28,12 @@ namespace BarDG.Domain.Entity
                 {
                     if (itemNaComanda.Produto.Equals(produto))
                     {
+                        if(produto.CompraMaxima != 0 && itemNaComanda.Quantidade >= produto.CompraMaxima)
+                        {
+                            this.AddNotification("AddItem(Produto)", $"Quantidade maxima do produto \"{produto.Descricao}\" atingida.");
+                            return;
+                        }
+
                         itemNaComanda.Quantidade++;
                     }
                 }
