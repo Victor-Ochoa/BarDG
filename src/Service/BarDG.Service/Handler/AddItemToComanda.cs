@@ -15,12 +15,14 @@ namespace BarDG.Service.Handler
         private readonly IRepository<Comanda> _repositoryComanda;
         private readonly IRepository<Produto> _repositoryProduto;
         private readonly IRepository<Item> _repositoryItem;
+        private readonly IMediator _mediator;
 
-        public AddItemToComanda(IRepository<Comanda> repositoryComanda, IRepository<Produto> repositoryProduto, IRepository<Item> repositoryItem)
+        public AddItemToComanda(IRepository<Comanda> repositoryComanda, IRepository<Produto> repositoryProduto, IRepository<Item> repositoryItem, IMediator mediator)
         {
             this._repositoryComanda = repositoryComanda;
             this._repositoryProduto = repositoryProduto;
             _repositoryItem = repositoryItem;
+            this._mediator = mediator;
         }
         public async Task<Comanda> Handle(Domain.Command.AddItemToComanda request, CancellationToken cancellationToken)
         {
@@ -39,6 +41,8 @@ namespace BarDG.Service.Handler
             }
 
             await _repositoryItem.SaveChanges(cancellationToken);
+
+            comanda = await _mediator.Send(new Domain.Command.ApplyPromocoes() { Comanda = comanda });
 
             return comanda;
         }

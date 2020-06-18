@@ -20,7 +20,7 @@ namespace BarDG.Domain.Entity
                 this.AddNotification("AddItem(Produto)", "Produto nulo");
                 return;
             }
-                
+
 
             if (Itens.Any(x => x.Produto.Equals(produto)))
             {
@@ -28,7 +28,7 @@ namespace BarDG.Domain.Entity
                 {
                     if (itemNaComanda.Produto.Equals(produto))
                     {
-                        if(produto.CompraMaxima != 0 && itemNaComanda.Quantidade >= produto.CompraMaxima)
+                        if (produto.CompraMaxima != 0 && itemNaComanda.Quantidade >= produto.CompraMaxima)
                         {
                             this.AddNotification("AddItem(Produto)", $"Quantidade maxima do produto \"{produto.Descricao}\" atingida.");
                             return;
@@ -41,6 +41,41 @@ namespace BarDG.Domain.Entity
             else
             {
                 Itens.Add(new Item(produto));
+            }
+        }
+
+        public void AplicarPromo(Promocao promocao)
+        {
+            if (promocao.PromocaoValida(this))
+            {
+                if (promocao.Invalid)
+                    return;
+
+
+                var itemPromo = Itens.SingleOrDefault(x => x.Produto == promocao.ItemDesconto);
+
+                if (itemPromo != null)
+                {
+                    if (promocao.RepetirPromocao)
+                    {
+                        for (int i = 0; i < promocao.RepetirXVezes(this); i++)
+                        {
+                            itemPromo.AddDesconto(promocao);
+                        }
+                    }
+                    else
+                    {
+                        itemPromo.AddDesconto(promocao);
+                    }
+                }
+            }
+        }
+
+        public void zerarDesconto()
+        {
+            foreach (var item in Itens)
+            {
+                item.Desconto = 0;
             }
         }
 
