@@ -21,42 +21,7 @@ namespace BarDG.Repository
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Domain.Entity.Produto>().HasKey(x => x.Id);
-            modelBuilder.Entity<Domain.Entity.Produto>().Ignore(x => x.Notifications);
-
-            modelBuilder.Entity<Domain.Entity.Comanda>().HasKey(x => x.Id);
-            modelBuilder.Entity<Domain.Entity.Comanda>().HasMany(x => x.Itens);
-            modelBuilder.Entity<Domain.Entity.Comanda>().Ignore(x => x.Notifications);
-
-            modelBuilder.Entity<Domain.Entity.Item>().HasKey(x => x.Id);
-            modelBuilder.Entity<Domain.Entity.Item>().Ignore(x => x.Notifications);
-
-            modelBuilder.Entity<Domain.Entity.NotaFiscal>().HasKey(x => x.Id);
-            modelBuilder.Entity<Domain.Entity.NotaFiscal>().Ignore(x => x.Notifications);
-
-            modelBuilder.Entity<Domain.Entity.Produto>().HasData(
-                new Domain.Entity.Produto
-                {
-                    Descricao = "Cerveja",
-                    Valor = 5
-                },
-                new Domain.Entity.Produto
-                {
-                    Descricao = "Conhaque",
-                    Valor = 20
-                },
-                new Domain.Entity.Produto
-                {
-                    Descricao = "Suco",
-                    Valor = 50,
-                    CompraMaxima = 3
-                },
-                new Domain.Entity.Produto
-                {
-                    Descricao = "Água",
-                    Valor = 70
-                }
-            );
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ModelBinding.Produto).Assembly);
         }
     }
 }
