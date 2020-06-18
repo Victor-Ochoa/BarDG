@@ -18,6 +18,13 @@ namespace BarDG.Domain.Entity
 
         public NotaFiscal(Comanda Comanda)
         {
+            if(Comanda == null)
+            {
+                AddNotification("NotaFiscal()", "Comanda Nula");
+                return;
+            }
+
+
             Itens = GenerateNotaFiscalItemForComanda(Comanda).ToList();
         }
 
