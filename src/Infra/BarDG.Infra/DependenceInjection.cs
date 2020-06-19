@@ -1,6 +1,7 @@
 ﻿using BarDG.Repository;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,14 @@ namespace BarDG.Infra
 {
     public static class DependenceInjection
     {
-        public static IServiceCollection AddRepository(this IServiceCollection service)
+        public static IServiceCollection AddRepository(this IServiceCollection service, IConfiguration configuration)
         {
             service.AddTransient(typeof(Domain.Interface.IRepository<>), typeof(Repository.RepositoryBase<>));
 
             service.AddDbContext<ApiDbContext>(p => {
                 p.EnableSensitiveDataLogging();
                 p.UseLazyLoadingProxies();
-                p.UseSqlite("DataSource=dbofile.db");
+                p.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
             });
 
             return service;

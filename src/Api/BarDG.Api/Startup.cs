@@ -45,7 +45,7 @@ namespace BarDG.Api
                     });
             });
 
-            services.AddRepository();
+            services.AddRepository(Configuration);
 
             services.AddMediator();
 
