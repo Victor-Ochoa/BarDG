@@ -1,0 +1,62 @@
+﻿@page "/Comanda"
+
+@using BarDG.Web.Data
+@inject ComandaData _comandasData
+@inject NavigationManager naviManager
+<div class="row">
+    <div class="col-9">
+        <h1>Comandas</h1>
+    </div>
+    <div class="col-3">
+        <button class="btn btn-primary" type="button" @onclick="newComanda">Nova Comanda</button>
+    </div>
+</div>
+
+<p>Comandas Abertas</p>
+
+@if (comandas == null)
+{
+    <p><em>Carregando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Data de criação</th>
+                <th>Numero de itens</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var comanda in comandas)
+            {
+                <tr>
+                    <td>@comanda.Id</td>
+                    <td>@comanda.DataCriacao.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@comanda.Itens.Count</td>
+                    @{ 
+                        var link = $"/comanda/{comanda.Id}";
+                    }
+                    <td><NavLink href="@link">Continuar</NavLink></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Domain.Entity.Comanda[] comandas;
+
+    protected override async Task OnInitializedAsync()
+    {
+        comandas = await _comandasData.GetAllComanda();
+    }
+
+    private async void newComanda()
+    {
+        var comandaid = await _comandasData.NewComanda();
+        naviManager.NavigateTo($"/comanda/{comandaid}");
+    }
+}

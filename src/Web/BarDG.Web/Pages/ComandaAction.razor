@@ -1,0 +1,18 @@
+﻿@page "/Comanda/{comandaId:int}"
+
+@using BarDG.Web.Data
+@inject ComandaData _comandasData
+
+<div class="row">
+    <div class="col-9">
+        <h1>Comandas @comandaId</h1>
+    </div>
+    <div class="col-3">
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public int comandaId { get; set; }
+}
