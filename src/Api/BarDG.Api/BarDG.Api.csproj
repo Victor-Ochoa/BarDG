@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="dbofile.db" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MediatR" Version="8.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5">
       <PrivateAssets>all</PrivateAssets>
@@ -20,6 +16,12 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\BarDG.Domain\BarDG.Domain.csproj" />
     <ProjectReference Include="..\..\Infra\BarDG.Infra\BarDG.Infra.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="dbofile.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 

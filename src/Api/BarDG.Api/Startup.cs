@@ -48,6 +48,7 @@ namespace BarDG.Api
             services.AddRepository();
 
             services.AddMediator();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +58,9 @@ namespace BarDG.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+
             app.UseSwagger();
             app.UseSwaggerUI(c => {
                 c.RoutePrefix = string.Empty;
