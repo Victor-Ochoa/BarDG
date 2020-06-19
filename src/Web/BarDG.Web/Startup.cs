@@ -29,6 +29,7 @@ namespace BarDG.Web
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<ProdutoData>();
+            services.AddSingleton<NotaFiscalData>();
             services.AddSingleton<ComandaData>();
             services.AddHttpClient("Api", x => x.BaseAddress = new Uri(Configuration["ApiUrl"]));
         }

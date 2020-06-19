@@ -1,0 +1,48 @@
+﻿@page "/NotaFiscal"
+
+@using BarDG.Web.Data
+@inject NotaFiscalData _notaFiscalData
+@inject NavigationManager naviManager
+
+<h1>Notas Fiscais</h1>
+
+@if (NotaFiscais == null)
+{
+    <p><em>Carregando...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Data de criação</th>
+                <th>Numero de itens</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var nota in NotaFiscais)
+            {
+            <tr>
+                <td>@nota.Id</td>
+                <td>@nota.DataCriacao.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@nota.Itens.Sum(x => x.Quantidade)</td>
+                @{
+                    var link = $"/NotaFiscal/{nota.Id}";
+                }
+                <td><NavLink href="@link">Visualizar</NavLink></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Domain.Entity.NotaFiscal[] NotaFiscais;
+
+    protected override async Task OnInitializedAsync()
+    {
+        NotaFiscais = await _notaFiscalData.GetAllNotaFiscal();
+    }
+}

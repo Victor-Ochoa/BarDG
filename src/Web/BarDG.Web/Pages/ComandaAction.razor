@@ -3,10 +3,14 @@
 @using BarDG.Web.Data
 @inject ComandaData _comandaData
 @inject ProdutoData _produtoData
+@inject NavigationManager naviManager
 
 <div class="row">
-    <div class="col-12">
+    <div class="col-11">
         <h1>Comandas @comandaId</h1>
+    </div>
+    <div class="col-1 offset-11 align-items-end">
+        <button class="btn btn-danger" type="button" @onclick="ResetComanda">Reset</button>
     </div>
 </div>
 
@@ -50,27 +54,27 @@ else
                 <tbody>
                     @foreach (var item in comanda.Itens)
                     {
-                    <tr>
-                        <td>@item.Produto.Descricao</td>
-                        <td>@item.Quantidade</td>
-                        <td>@item.Produto.Valor.ToString("C") </td>
-                        <td>@item.Desconto.ToString("C") </td>
-                        <td>@item.ValorTotal.ToString("C") </td>
-                    </tr>
+                        <tr>
+                            <td>@item.Produto.Descricao</td>
+                            <td>@item.Quantidade</td>
+                            <td>@item.Produto.Valor.ToString("C") </td>
+                            <td>@item.Desconto.ToString("C") </td>
+                            <td>@item.ValorTotal.ToString("C") </td>
+                        </tr>
                     }
                 </tbody>
                 <tfoot>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Valor Total</td>
-                    <td>@comanda.Itens.Sum(x => x.ValorTotal).ToString("C") </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Valor Total</td>
+                <td>@comanda.Itens.Sum(x => x.ValorTotal).ToString("C") </td>
                 </tfoot>
             </table>
         </div>
         <div class="row">
             <div class="col-md-3 offset-md-9 align-self-end">
-                <button class="form-control" type="button">Fechar Comanda</button>
+                <button class="form-control" type="button" @onclick="FecharComanda">Fechar Comanda</button>
             </div>
         </div>
     </div>
@@ -98,5 +102,18 @@ else
         comanda = await _comandaData.AddProduto(comandaId, ProdutoSelect);
 
         StateHasChanged();
+    }
+    private async void ResetComanda()
+    {
+
+        comanda = await _comandaData.ResetComanda(comandaId);
+
+        StateHasChanged();
+    }
+    private async void FecharComanda()
+    {
+
+        var nota = await _comandaData.FacharComanda(comandaId);
+        naviManager.NavigateTo($"/NotaFiscal/{nota.Id}");
     }
 }

@@ -1,0 +1,58 @@
+﻿@page "/NotaFiscal/{notaFiscalId:int}"
+
+@inject BarDG.Web.Data.NotaFiscalData _notaFiscalData
+
+
+<h3>Nota Fiscal</h3>
+
+@if (notaFiscal == null)
+{
+    <p><em>Carregando...</em></p>
+
+}
+else
+{
+    <p>Data: @notaFiscal.DataCriacao.ToString("dd/MM/yyyy HH:mm")</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Desconto</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in notaFiscal.Itens)
+            {
+                <tr>
+                    <td>@item.NomeProduto</td>
+                    <td>@item.Quantidade</td>
+                    <td>@item.Desconto.ToString("C")</td>
+                    <td>@item.Valor.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <td>Total desconto</td>
+            <td>@notaFiscal.TotalDesconto.ToString("C")</td>
+            <td>Valor Final</td>
+            <td>@notaFiscal.ValorFinal.ToString("C")</td>
+        </tfoot>
+    </table>
+}
+
+@code {
+
+    [Parameter]
+    public int notaFiscalId { get; set; }
+
+    public BarDG.Domain.Entity.NotaFiscal notaFiscal { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        notaFiscal = await _notaFiscalData.GetNotaFiscal(notaFiscalId);
+        StateHasChanged();
+    }
+}

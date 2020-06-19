@@ -91,5 +91,39 @@ namespace BarDG.Web.Data
 
             return new Comanda { };
         }
+        public async Task<Comanda> ResetComanda(int comandaId)
+        {
+            var response = await _httpClient.PostAsJsonAsync("/api/Comanda/ResetComanda", new Domain.Command.ResetComanda() { ComandaId = comandaId });
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<Comanda>(json, new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    WriteIndented = true
+                });
+
+            }
+
+            return new Comanda { };
+        }
+        public async Task<NotaFiscal> FacharComanda(int comandaId)
+        {
+            var response = await _httpClient.PostAsJsonAsync("/api/NotaFiscal/Generate", new Domain.Command.GenerateNotaFiscal() { ComandaId = comandaId });
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<NotaFiscal>(json, new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    WriteIndented = true
+                });
+
+            }
+
+            return new NotaFiscal { };
+        }
     }
 }
