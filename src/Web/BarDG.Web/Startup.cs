@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BarDG.Web.Data;
+using BlazorStrap;
 
 namespace BarDG.Web
 {
@@ -32,6 +33,7 @@ namespace BarDG.Web
             services.AddSingleton<NotaFiscalData>();
             services.AddSingleton<ComandaData>();
             services.AddHttpClient("Api", x => x.BaseAddress = new Uri(Configuration["ApiUrl"]));
+            services.AddBootstrapCss();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

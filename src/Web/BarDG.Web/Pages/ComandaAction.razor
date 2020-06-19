@@ -1,5 +1,6 @@
 ﻿@page "/Comanda/{comandaId:int}"
 
+@using BlazorStrap
 @using BarDG.Web.Data
 @inject ComandaData _comandaData
 @inject ProdutoData _produtoData
@@ -81,6 +82,16 @@ else
 
 
 }
+
+<BSModal @ref="LimiteDeCompraModal">
+    <BSModalBody><p>Limite de compra atingido.</p></BSModalBody>
+    <BSModalFooter>
+
+        <BSButton Color="Color.Secondary" @onclick="@(() => LimiteDeCompraModal.Hide())">Fechar</BSButton>
+
+    </BSModalFooter>
+
+</BSModal>
 @code {
 
     [Parameter]
@@ -97,11 +108,20 @@ else
         comanda = await _comandaData.GetComanda(comandaId);
     }
 
+    BlazorStrap.BSModal LimiteDeCompraModal { get; set; }
+
     private async void AddProduto()
     {
-        comanda = await _comandaData.AddProduto(comandaId, ProdutoSelect);
-
-        StateHasChanged();
+        var prod = comanda.Itens.SingleOrDefault(x => x.Produto.Id == ProdutoSelect);
+        if (prod == null || prod.Quantidade < prod.Produto.CompraMaxima)
+        {
+            comanda = await _comandaData.AddProduto(comandaId, ProdutoSelect);
+            StateHasChanged();
+        }
+        else
+        {
+            LimiteDeCompraModal.Show();
+        }
     }
     private async void ResetComanda()
     {
