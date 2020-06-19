@@ -1,46 +1,46 @@
 ﻿@page "/fetchdata"
 
 @using BarDG.Web.Data
-@inject WeatherForecastService ForecastService
+@inject ProdutoData _produtoData
 
-<h1>Weather forecast</h1>
+<h1>Produtos</h1>
 
-<p>This component demonstrates fetching data from a service.</p>
+<p>Lista de produtos disponíveis</p>
 
-@if (forecasts == null)
+@if (produtos == null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>Carregando...</em></p>
 }
 else
 {
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Id</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Numero Maximo de itens na comanda</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var produto in produtos)
             {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
+            <tr>
+                <td>@produto.Id</td>
+                <td>@produto.Descricao</td>
+                <td>@produto.Valor.ToString("C")</td>
+                <td>@produto.CompraMaxima</td>
+            </tr>
             }
         </tbody>
     </table>
 }
 
 @code {
-    private WeatherForecast[] forecasts;
+    private Domain.Entity.Produto[] produtos;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        produtos = await _produtoData.GetAllProdutos();
     }
 }

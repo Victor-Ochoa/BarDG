@@ -28,7 +28,8 @@ namespace BarDG.Web
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<ProdutoData>();
+            services.AddHttpClient("Api", x => x.BaseAddress = new Uri(Configuration["ApiUrl"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
