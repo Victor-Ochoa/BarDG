@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{EAA4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarDG.Service", "src\Service\BarDG.Service\BarDG.Service.csproj", "{A46FCBE2-E27D-4C7A-8B59-5C756342C3DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarDG.DomainTests", "src\Domain\BarDG.DomainTests\BarDG.DomainTests.csproj", "{AEB8D330-A6E3-488A-BECC-E36E957CD8B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarDG.DomainTests", "src\Domain\BarDG.DomainTests\BarDG.DomainTests.csproj", "{AEB8D330-A6E3-488A-BECC-E36E957CD8B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

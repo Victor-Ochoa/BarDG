@@ -13,6 +13,9 @@ namespace BarDG.Api.Controllers
         [HttpGet]
         [Route("")]
         public async Task<IActionResult> GetAll([FromServices] IRepository<Comanda> _repository) => Ok(await _repository.GetAll(asNoTracking: true));
+        [HttpGet]
+        [Route("{comandaId:int}")]
+        public async Task<IActionResult> Get([FromServices] IRepository<Comanda> _repository,[FromRoute] int comandaId) => Ok(await _repository.Get(comandaId));
 
         [HttpPut]
         [Route("Create")]

@@ -1,18 +1,56 @@
 ﻿@page "/Comanda/{comandaId:int}"
 
 @using BarDG.Web.Data
-@inject ComandaData _comandasData
+@inject ComandaData _comandaData
+@inject ProdutoData _produtoData
 
 <div class="row">
-    <div class="col-9">
+    <div class="col-12">
         <h1>Comandas @comandaId</h1>
-    </div>
-    <div class="col-3">
     </div>
 </div>
 
+@if (produtos == null && comanda == null)
+{
+    <p><em>Carregando...</em></p>
+}
+else
+{
+    <div class="container">
+        <div class="col-6">
+            <div class="form-group">
+                <label class="form-text">Selecione o produto para adicionar na comanda</label>
+                <select @bind="ProdutoSelect" class="form-control">
+                    @foreach (var produto in produtos)
+                    {
+                        <option value=@produto.Id>@produto.Descricao</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-6">
+            <button type="button" @onclick="AddProduto">Adicionar Produto</button>
+        </div>
+    </div>
+}
 @code {
 
     [Parameter]
     public int comandaId { get; set; }
+
+    public BarDG.Domain.Entity.Comanda comanda { get; set; }
+    public BarDG.Domain.Entity.Produto[] produtos { get; set; }
+
+    public int ProdutoSelect { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        produtos = await _produtoData.GetAllProdutos();
+        comanda = await _comandaData.GetComanda(comandaId);
+    }
+
+    private async void AddProduto()
+    {
+
+    }
 }

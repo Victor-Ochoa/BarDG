@@ -17,6 +17,7 @@ namespace BarDG.Web.Data
         {
             this._httpClient = httpClientFactory.CreateClient("Api");
         }
+
         public async Task<Comanda[]> GetAllComanda()
         {
             var response = await _httpClient.GetAsync("/api/Comanda");
@@ -34,6 +35,25 @@ namespace BarDG.Web.Data
 
             return new Comanda[] { };
         }
+
+        public async Task<Comanda> GetComanda(int comandaId)
+        {
+            var response = await _httpClient.GetAsync($"/api/Comanda/{comandaId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<Comanda>(json, new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    WriteIndented = true
+                });
+
+            }
+
+            return new Comanda{ };
+        }
+
         public async Task<int> NewComanda()
         {
             var response = await _httpClient.PutAsync("/api/Comanda/Create",new StringContent(""));
