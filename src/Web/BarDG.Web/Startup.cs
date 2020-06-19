@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BarDG.Web.Data;
 using BlazorStrap;
+using BarDG.Web.Model;
 
 namespace BarDG.Web
 {
@@ -29,9 +30,11 @@ namespace BarDG.Web
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddSingleton(x => new CredenciaisAuth { email = Configuration.GetSection("Credenciais")["email"], password = Configuration.GetSection("Credenciais")["pwd"] });
             services.AddSingleton<ProdutoData>();
             services.AddSingleton<NotaFiscalData>();
             services.AddSingleton<ComandaData>();
+            services.AddSingleton<AuthData>();
             services.AddHttpClient("Api", x => x.BaseAddress = new Uri(Configuration["ApiUrl"]));
             services.AddBootstrapCss();
         }

@@ -11,15 +11,19 @@ namespace BarDG.Web.Data
     public class NotaFiscalData
     {
         private readonly HttpClient _httpClient;
+        private readonly AuthData _authData;
 
-        public NotaFiscalData(IHttpClientFactory httpClientFactory)
+        public NotaFiscalData(IHttpClientFactory httpClientFactory, AuthData authData)
         {
             this._httpClient = httpClientFactory.CreateClient("Api");
+            this._authData = authData;
         }
 
 
         public async Task<NotaFiscal[]> GetAllNotaFiscal()
         {
+            await _authData.ValidarToken(_httpClient);
+
             var response = await _httpClient.GetAsync("/api/NotaFiscal");
 
             if (response.IsSuccessStatusCode)
@@ -33,11 +37,18 @@ namespace BarDG.Web.Data
 
             }
 
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                _authData.Token = null;
+                return await GetAllNotaFiscal();
+            }
             return new NotaFiscal[] { };
         }
 
         public async Task<NotaFiscal> GetNotaFiscal(int notaFiscalId)
         {
+            await _authData.ValidarToken(_httpClient);
+
             var response = await _httpClient.GetAsync($"/api/NotaFiscal/{notaFiscalId}");
 
             if (response.IsSuccessStatusCode)
@@ -49,6 +60,12 @@ namespace BarDG.Web.Data
                     WriteIndented = true
                 });
 
+            }
+
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                _authData.Token = null;
+                return await GetNotaFiscal(notaFiscalId);
             }
 
             return new NotaFiscal { };

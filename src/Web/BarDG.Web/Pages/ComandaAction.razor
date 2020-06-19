@@ -113,7 +113,7 @@ else
     private async void AddProduto()
     {
         var prod = comanda.Itens.SingleOrDefault(x => x.Produto.Id == ProdutoSelect);
-        if (prod == null || prod.Quantidade < prod.Produto.CompraMaxima)
+        if (prod == null || prod.Produto.CompraMaxima == 0 || prod.Quantidade < prod.Produto.CompraMaxima)
         {
             comanda = await _comandaData.AddProduto(comandaId, ProdutoSelect);
             StateHasChanged();
