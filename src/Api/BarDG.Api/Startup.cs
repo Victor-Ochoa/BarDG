@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using NetDevPack.Identity;
 
 namespace BarDG.Api
 {
@@ -24,12 +25,14 @@ namespace BarDG.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
 
-            services.AddSwaggerGen(c => {
+            services.addIdentity(Configuration);
+
+            services.AddSwaggerGen(c =>
+            {
 
                 c.SwaggerDoc("Alpha",
                     new OpenApiInfo
@@ -43,6 +46,27 @@ namespace BarDG.Api
                             Url = new Uri("https://github.com/Victor-Ochoa")
                         }
                     });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    BearerFormat = "Bearer ",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                }) ;
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                   {
+                        new OpenApiSecurityScheme
+                        {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                        },
+                        new string[] { }
+                    }
+                  });
             });
 
             services.AddRepository(Configuration);
@@ -51,7 +75,6 @@ namespace BarDG.Api
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -62,7 +85,8 @@ namespace BarDG.Api
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => {
+            app.UseSwaggerUI(c =>
+            {
                 c.RoutePrefix = string.Empty;
                 c.SwaggerEndpoint("/swagger/Alpha/swagger.json", "Bar Do DG - Alpha");
             });
@@ -71,7 +95,7 @@ namespace BarDG.Api
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthConfiguration();
 
             app.UseEndpoints(endpoints =>
             {
