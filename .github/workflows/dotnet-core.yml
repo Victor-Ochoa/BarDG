@@ -27,13 +27,25 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal
       
-    - name: dotnet publish
-      run: dotnet publish src/Api/BarDG.Api -c Release -o ${{env.DOTNET_ROOT}}/myapp
+    - name: dotnet publish api
+      run: dotnet publish src/Api/BarDG.Api -c Release -o ${{env.DOTNET_ROOT}}/BarDgApi
 
-    - name: Deploy to Azure Web App
+    - name: Deploy to Azure Web App api
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'bardgapi'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_a9bd3cfa9d2349d2b8c7574ad6e8058e }}
-        package: ${{env.DOTNET_ROOT}}/myapp 
+        package: ${{env.DOTNET_ROOT}}/BarDgApi 
+      
+      
+    - name: dotnet publish web
+      run: dotnet publish src/Web/BarDG.Web -c Release -o ${{env.DOTNET_ROOT}}/BarDgWeb
+
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'bardgweb'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_7b7bbfd8a7c3460b951a7bdc6eeadcd0 }}
+        package: ${{env.DOTNET_ROOT}}/BarDgWeb 
