@@ -35,7 +35,7 @@ else
                 <tr>
                     <td>@comanda.Id</td>
                     <td>@comanda.DataCriacao.ToString("dd/MM/yyyy HH:mm")</td>
-                    <td>@comanda.Itens.Count</td>
+                    <td>@comanda.Itens.Sum(x => x.Quantidade)</td>
                     @{ 
                         var link = $"/comanda/{comanda.Id}";
                     }

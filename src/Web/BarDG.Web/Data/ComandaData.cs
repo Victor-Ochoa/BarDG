@@ -73,5 +73,23 @@ namespace BarDG.Web.Data
 
             return 0;
         }
+
+        public async Task<Comanda> AddProduto(int comandaId, int produtoId)
+        {
+            var response = await _httpClient.PostAsJsonAsync("/api/Comanda/AddItemToComanda", new Domain.Command.AddItemToComanda() { ComandaId = comandaId, ProductId = produtoId});
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<Comanda>(json, new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    WriteIndented = true
+                });
+
+            }
+
+            return new Comanda { };
+        }
     }
 }

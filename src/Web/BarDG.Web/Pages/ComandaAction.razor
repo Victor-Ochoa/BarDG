@@ -10,28 +10,72 @@
     </div>
 </div>
 
-@if (produtos == null && comanda == null)
+
+@if (produtos == null || comanda == null)
 {
     <p><em>Carregando...</em></p>
 }
 else
 {
     <div class="container">
-        <div class="col-6">
-            <div class="form-group">
-                <label class="form-text">Selecione o produto para adicionar na comanda</label>
-                <select @bind="ProdutoSelect" class="form-control">
-                    @foreach (var produto in produtos)
-                    {
-                        <option value=@produto.Id>@produto.Descricao</option>
-                    }
-                </select>
+        <div class="row">
+            <div class="col-5">
+                <div class="form-group">
+                    <label class="form-text">Selecione o produto para adicionar na comanda</label>
+                    <select @bind="ProdutoSelect" class="form-control">
+                        @foreach (var produto in produtos)
+                        {
+                            <option value=@produto.Id>@produto.Descricao</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-5">
+
+                <label class="form-text">  &nbsp </label>
+                <button class="form-control" type="button" @onclick="AddProduto">Adicionar Produto</button>
             </div>
         </div>
-        <div class="col-6">
-            <button type="button" @onclick="AddProduto">Adicionar Produto</button>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Valor</th>
+                        <th>Desconto</th>
+                        <th>Valor com Desconto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in comanda.Itens)
+                    {
+                    <tr>
+                        <td>@item.Produto.Descricao</td>
+                        <td>@item.Quantidade</td>
+                        <td>@item.Produto.Valor.ToString("C") </td>
+                        <td>@item.Desconto.ToString("C") </td>
+                        <td>@item.ValorTotal.ToString("C") </td>
+                    </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Valor Total</td>
+                    <td>@comanda.Itens.Sum(x => x.ValorTotal).ToString("C") </td>
+                </tfoot>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-md-3 offset-md-9 align-self-end">
+                <button class="form-control" type="button">Fechar Comanda</button>
+            </div>
         </div>
     </div>
+
+
 }
 @code {
 
@@ -51,6 +95,8 @@ else
 
     private async void AddProduto()
     {
+        comanda = await _comandaData.AddProduto(comandaId, ProdutoSelect);
 
+        StateHasChanged();
     }
 }
