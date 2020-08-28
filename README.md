@@ -40,8 +40,3 @@ Projeto com a Pagina Web, usando Bazor Server
 - No repositório usei o EF core e o padrão de Repository utilizando um repositório genérico, adicionaria um Unit Of Work para melhorar o código.
 - Os handler foram separados dos commands do padrão mediator separando as referencias.
 - Para o deploy automatizado usei o github Actions vinculado ao azure subindo as 2 aplicações juntas.
-
-## Live
-- API: https://bardgapi.azurewebsites.net/index.html Para autenticar usar: email : 'web@client.com' senha:'01cd#998b2!311eab3dE0242ac13OOO4'
-- WEB: https://bardgweb.azurewebsites.net/
-
